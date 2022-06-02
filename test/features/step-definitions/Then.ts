@@ -5,3 +5,13 @@ Then(/^I expect that element "(.*)" contain the text "(.*)"$/, async function(el
     let elementText = await $(element).getText();
     chai.expect(elementText).to.equal(text);
 });
+
+Then(/^I expect that checkbox "(.*)" is (checked|unchecked)$/, async function(element, state){
+    let actualState = await $(element).isSelected();
+    if(state === 'checked'){
+        chai.expect(actualState).to.be.true;
+    }
+    else if(state === 'unchecked'){
+        chai.expect(actualState).to.be.false;
+    }
+});

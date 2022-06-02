@@ -4,7 +4,7 @@ When(/^I wait on the element "(.*)" to be displayed$/, async function(element){
     await $(element).waitForDisplayed();
 });
 
-When(/^I click on the element (.*)$/, async function(element){
+When(/^I click on the element "(.*)"$/, async function(element){
     await $(element).click();
 });
 
@@ -34,5 +34,14 @@ When(/^I select the (text|value|index) "(.*)" from dropdown "(.*)"$/, async func
     }
     else if(type==='index'){
         await $(element).selectByIndex(value)
+    }
+});
+
+When(/^I (check|uncheck) the checkbox "(.*)"$/, async function(checkUncheck, element){
+    if(checkUncheck === 'check' && !(await $(element).isSelected())){
+        await $(element).click();
+    }
+    else if(checkUncheck === 'uncheck' && await $(element).isSelected()){
+        await $(element).click();
     }
 });
