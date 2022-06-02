@@ -24,3 +24,15 @@ When(/^I type the value "(.*)" to the element "(.*)"$/, async function(value, el
         await browser.keys(charValue);
     }
 });
+
+When(/^I select the (text|value|index) "(.*)" from dropdown "(.*)"$/, async function(type, value, element){
+    if(type==='text') {
+        await $(element).selectByVisibleText(value);
+    }
+    else if(type==='value'){
+        await $(element).selectByAttribute("value", value)
+    }
+    else if(type==='index'){
+        await $(element).selectByIndex(value)
+    }
+});
