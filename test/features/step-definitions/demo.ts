@@ -13,7 +13,7 @@ When(/^Search with (.*)$/, async function(searchItem){
 });
 
 When(/^Click on the first search result*/, async function(){
-   let element = await $('<h3>');
+   let element = await $('//h3/..'); // //h3/parent::a
    await element.click();
 });
 
