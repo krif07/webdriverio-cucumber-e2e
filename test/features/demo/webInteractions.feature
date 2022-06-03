@@ -22,7 +22,7 @@ Feature: Web Interaction Feature
     And   I select the index "2" from dropdown "#dropdown"
     And   I expect that element "//option[@selected="selected"]" contain the text "Option 2"
 
-  @demo
+  @demo3
   Scenario: Web Interactions Checkbox
     Given I open the page "/checkboxes"
     And   I wait on the element "#checkboxes" to be displayed
@@ -36,5 +36,16 @@ Feature: Web Interaction Feature
     And   I uncheck the checkbox "//form[@id='checkboxes']/input[2]"
     And   I uncheck the checkbox "//form[@id='checkboxes']/input[1]"
     And   I uncheck the checkbox "//form[@id='checkboxes']/input[2]"
+    And   I expect that checkbox "//form[@id='checkboxes']/input[1]" is unchecked
+    And   I expect that checkbox "//form[@id='checkboxes']/input[2]" is unchecked
+
+  @demo
+  Scenario: Web Interactions Checkboxes
+    Given I open the page "/checkboxes"
+    And   I wait on the element "#checkboxes" to be displayed
+    When  I check all the checkboxes "//form[@id='checkboxes']/input"
+    Then  I expect that checkbox "//form[@id='checkboxes']/input[1]" is checked
+    And   I expect that checkbox "//form[@id='checkboxes']/input[2]" is checked
+    And   I uncheck all the checkboxes "//form[@id='checkboxes']/input"
     And   I expect that checkbox "//form[@id='checkboxes']/input[1]" is unchecked
     And   I expect that checkbox "//form[@id='checkboxes']/input[2]" is unchecked

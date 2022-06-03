@@ -45,3 +45,16 @@ When(/^I (check|uncheck) the checkbox "(.*)"$/, async function(checkUncheck, ele
         await $(element).click();
     }
 });
+
+When(/^I (check|uncheck) all the checkboxes "(.*)"$/, async function(checkUncheck, elements){
+    let arrElements = await $$(elements);
+    for(let i=0; i<arrElements.length; i++){
+        let element = arrElements[i];
+        if(checkUncheck === 'check' && !(await $(element).isSelected())){
+            await element.click();
+        }
+        else if(checkUncheck === 'uncheck' && await $(element).isSelected()){
+            await element.click();
+        }
+    }
+});
