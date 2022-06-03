@@ -28,3 +28,8 @@ Then(/^I expect that (alert) is open$/, async function(alertType){
 Then(/^I expect that (alert) text is "(.*)"$/, async function(alertType, text){
     chai.expect(await browser.getAlertText()).to.equal(text);
 });
+
+Then(/^I expect that element "(.*)" contain (.*) items$/, async function(element, numberOfItems){
+    let listOfItems = await $$(element);
+    chai.expect(listOfItems.length).to.equal(parseInt(numberOfItems));
+});
