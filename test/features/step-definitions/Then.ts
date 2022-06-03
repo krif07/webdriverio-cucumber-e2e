@@ -15,3 +15,8 @@ Then(/^I expect that checkbox "(.*)" is (checked|unchecked)$/, async function(el
         chai.expect(actualState).to.be.false;
     }
 });
+
+Then(/^I expect that the page title is "(.*)"$/, async function(title){
+    let pageTitle = await browser.getTitle();
+    chai.expect(pageTitle).to.equal(title);
+});

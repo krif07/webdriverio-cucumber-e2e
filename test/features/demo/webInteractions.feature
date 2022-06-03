@@ -39,7 +39,7 @@ Feature: Web Interaction Feature
     And   I expect that checkbox "//form[@id='checkboxes']/input[1]" is unchecked
     And   I expect that checkbox "//form[@id='checkboxes']/input[2]" is unchecked
 
-  @demo
+  @demo4
   Scenario: Web Interactions Checkboxes
     Given I open the page "/checkboxes"
     And   I wait on the element "#checkboxes" to be displayed
@@ -49,3 +49,21 @@ Feature: Web Interaction Feature
     And   I uncheck all the checkboxes "//form[@id='checkboxes']/input"
     And   I expect that checkbox "//form[@id='checkboxes']/input[1]" is unchecked
     And   I expect that checkbox "//form[@id='checkboxes']/input[2]" is unchecked
+
+  @demo
+  Scenario: Web Interactions Windows
+    Given I open the page "/windows"
+    And   I wait on the element "div.example a" to be displayed
+    When  I click on the element "div.example a"
+    Then  I expect that the page title is "The Internet"
+    And   I switch the window to "New Window"
+    And   I wait on the element "body > div.example h3" to be displayed
+    And   I expect that the page title is "New Window"
+    And   I expect that element "body > div.example h3" contain the text "New Window"
+    And   I switch the window to "The Internet"
+    And   I click on the element "=Elemental Selenium"
+    And   I switch the window to "Elemental Selenium: Receive a Free, Weekly Tip on Using Selenium like a Pro"
+    And   I wait on the element "h2.subheader" to be displayed
+    And   I expect that the page title is "Elemental Selenium: Receive a Free, Weekly Tip on Using Selenium like a Pro"
+    And   I expect that element "h2.subheader" contain the text "A free, once-weekly e-mail on how to use Selenium like a Pro"
+

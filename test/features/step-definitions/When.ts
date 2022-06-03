@@ -58,3 +58,14 @@ When(/^I (check|uncheck) all the checkboxes "(.*)"$/, async function(checkUnchec
         }
     }
 });
+
+When(/^I switch the window to "(.*)"$/, async function(windowName){
+    let windowHandles = await browser.getWindowHandles();
+    for(let i=0; i<windowHandles.length; i++){
+        await browser.switchToWindow(windowHandles[i]);
+        let currentTitle = await browser.getTitle();
+        if(currentTitle === windowName) {
+            break;
+        }
+    }
+});
