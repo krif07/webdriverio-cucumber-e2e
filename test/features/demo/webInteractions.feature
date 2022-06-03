@@ -124,7 +124,7 @@ Feature: Web Interaction Feature
     And   I set the value "Other value to test" to the element "#tinymce p"
     Then  I expect that element "#tinymce p" contain the text "Other value to test"
 
-  @demo
+  @demo10
   Scenario: Web Interactions Key press
     Given I open the page "/"
     And   I wait on the element "=WYSIWYG Editor" to be displayed
