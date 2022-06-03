@@ -92,3 +92,12 @@ When(/^I upload a file "(.*)"$/, async function(fileName){
     await $('#file-upload').setValue(remoteFilePath);
     await $('#file-submit').click();
 });
+
+When(/^I go to the iframe "(.*)"$/, async function(element){
+    let iframe = await $(element);
+    await browser.switchToFrame(iframe);
+});
+
+When(/^I go to the parent frame$/, async function(){
+    await browser.switchToParentFrame();
+});

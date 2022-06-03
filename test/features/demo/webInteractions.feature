@@ -93,11 +93,22 @@ Feature: Web Interaction Feature
     And   I accept the alert message
     And   I expect that element "#result" contain the text "You entered: algo"
 
-  @demo
+  @demo7
   Scenario: Web Interactions upload files
     Given I open the page "/upload"
     And   I wait on the element "#file-submit" to be displayed
     And   I upload a file "dummyFile.txt"
     Then  I expect that element "h3" contain the text "File Uploaded!"
 
+  @demo
+  Scenario: Web Interactions iframe
+    Given I open the page "/frames"
+    And   I wait on the element "=iFrame" to be displayed
+    And   I click on the element "=iFrame"
+    And   I wait on the element "#mce_0_ifr" to be displayed
+    When  I go to the iframe "#mce_0_ifr"
+    And   I set the value "algun valor para testear" to the element "#tinymce p"
+    Then  I expect that element "#tinymce p" contain the text "algun valor para testear"
+    And   I go to the parent frame
+    And   I expect that element "<h3>" contain the text "An iFrame containing the TinyMCE WYSIWYG Editor"
 
