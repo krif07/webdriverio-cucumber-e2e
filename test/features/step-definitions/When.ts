@@ -14,9 +14,9 @@ When(/^I set the value "(.*)" to the element "(.*)"$/, async function(value, ele
     await $(element).setValue(value);
 });
 
-When(/^I scroll to the element "(.*)"$/, async function(element){
+/*When(/^I scroll to the element "(.*)"$/, async function(element){
     await $(element).scrollIntoView();
-});
+});*/
 
 When(/^I type the value "(.*)" to the element "(.*)"$/, async function(value, element){
     await $(element).click();
@@ -100,4 +100,16 @@ When(/^I go to the iframe "(.*)"$/, async function(element){
 
 When(/^I go to the parent frame$/, async function(){
     await browser.switchToParentFrame();
+});
+
+When(/^I use the key value "(.*)"$/, async function(keyValue){
+    await browser.keys(keyValue);
+});
+
+When(/^I use two key values "(.*)" "(.*)"$/, async function(keyValue1, keyValue2){
+    await browser.keys([keyValue1, keyValue2]);
+});
+
+When(/^I scroll into the element "(.*)" to the top (true|false)$/, async function(element, onTop){
+    await $(element).scrollIntoView(onTop);
 });

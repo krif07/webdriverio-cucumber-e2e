@@ -100,7 +100,7 @@ Feature: Web Interaction Feature
     And   I upload a file "dummyFile.txt"
     Then  I expect that element "h3" contain the text "File Uploaded!"
 
-  @demo
+  @demo8
   Scenario: Web Interactions iframe
     Given I open the page "/frames"
     And   I wait on the element "=iFrame" to be displayed
@@ -112,3 +112,20 @@ Feature: Web Interaction Feature
     And   I go to the parent frame
     And   I expect that element "<h3>" contain the text "An iFrame containing the TinyMCE WYSIWYG Editor"
 
+  @demo9
+  Scenario: Web Interactions Key press
+    Given I open the page "/iframe"
+    And   I wait on the element "#mce_0_ifr" to be displayed
+    When  I go to the iframe "#mce_0_ifr"
+    And   I click on the element "#tinymce p"
+    #And   I use two key values "Meta" "A"
+    And   I use two key values "Control" "A"
+    And   I use the key value "Delete"
+    And   I set the value "Other value to test" to the element "#tinymce p"
+    Then  I expect that element "#tinymce p" contain the text "Other value to test"
+
+  @demo
+  Scenario: Web Interactions Key press
+    Given I open the page "/"
+    And   I wait on the element "=WYSIWYG Editor" to be displayed
+    When  I scroll into the element "=WYSIWYG Editor" to the top false
