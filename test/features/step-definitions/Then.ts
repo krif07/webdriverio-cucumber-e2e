@@ -33,3 +33,32 @@ Then(/^I expect that element "(.*)" contain (.*) items$/, async function(element
     let listOfItems = await $$(element);
     chai.expect(listOfItems.length).to.equal(parseInt(numberOfItems));
 });
+
+Then(/^I expect that elements "(.*)" contain value (equal to|greater than|less than) (.*)$/,
+    async function(elements, compareType, numberToAssert){
+    let listOfElements = await $$(elements);
+    let strNumberArr = [];
+    for(let i=0; i<listOfElements.length; i++){
+        let strNumber = await listOfElements[i].getText();
+        strNumberArr.push(strNumber);
+    }
+    // + : convert string to number
+    let numberArr = strNumberArr.map(
+        ele => parseFloat(ele.toString().replace('$', ''))
+    );
+    let validNumbers;
+    if(compareType === 'greater than') {
+        validNumbers = numberArr.filter(ele => ele > parseFloat(numberToAssert));
+    }
+    else if(compareType === 'equal to'){
+        validNumbers = numberArr.filter(ele => ele == parseFloat(numberToAssert));
+    }
+    else if(compareType === 'less than'){
+        validNumbers = numberArr.filter(ele => ele < parseFloat(numberToAssert));
+    }
+
+    console.log(`>>>>>>>>>>> validNumbers: ${validNumbers}`);
+    console.log(`>>>>>>>>>>> strNumberArr: ${strNumberArr}`);
+
+    chai.expect(validNumbers.length).to.equal(strNumberArr.length);
+});
