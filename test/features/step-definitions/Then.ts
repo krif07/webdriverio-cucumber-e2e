@@ -20,3 +20,11 @@ Then(/^I expect that the page title is "(.*)"$/, async function(title){
     let pageTitle = await browser.getTitle();
     chai.expect(pageTitle).to.equal(title);
 });
+
+Then(/^I expect that (alert) is open$/, async function(alertType){
+    chai.expect(await browser.isAlertOpen()).to.be.true;
+});
+
+Then(/^I expect that (alert) text is "(.*)"$/, async function(alertType, text){
+    chai.expect(await browser.getAlertText()).to.equal(text);
+});

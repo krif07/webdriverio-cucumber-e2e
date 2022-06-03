@@ -50,7 +50,7 @@ Feature: Web Interaction Feature
     And   I expect that checkbox "//form[@id='checkboxes']/input[1]" is unchecked
     And   I expect that checkbox "//form[@id='checkboxes']/input[2]" is unchecked
 
-  @demo
+  @demo5
   Scenario: Web Interactions Windows
     Given I open the page "/windows"
     And   I wait on the element "div.example a" to be displayed
@@ -67,3 +67,28 @@ Feature: Web Interaction Feature
     And   I expect that the page title is "Elemental Selenium: Receive a Free, Weekly Tip on Using Selenium like a Pro"
     And   I expect that element "h2.subheader" contain the text "A free, once-weekly e-mail on how to use Selenium like a Pro"
 
+  @demo
+  Scenario: Web Interactions javascript alerts
+    Given I open the page "/javascript_alerts"
+    And   I wait on the element "div.example h3" to be displayed
+    When  I click on the element "//button[.='Click for JS Alert']"
+    Then  I expect that alert is open
+    And   I expect that alert text is "I am a JS Alert"
+    And   I accept the alert message
+    And   I expect that element "#result" contain the text "You successfully clicked an alert"
+    And   I click on the element "//button[.='Click for JS Confirm']"
+    And   I expect that alert is open
+    And   I expect that alert text is "I am a JS Confirm"
+    And   I accept the alert message
+    And   I expect that element "#result" contain the text "You clicked: Ok"
+    And   I click on the element "//button[.='Click for JS Confirm']"
+    And   I expect that alert is open
+    And   I expect that alert text is "I am a JS Confirm"
+    And   I cancel the alert message
+    And   I expect that element "#result" contain the text "You clicked: Cancel"
+    And   I click on the element "//button[.='Click for JS Prompt']"
+    And   I expect that alert is open
+    And   I expect that alert text is "I am a JS prompt"
+    And   I enter the text "algo" to the alert
+    And   I accept the alert message
+    And   I expect that element "#result" contain the text "You entered: algo"

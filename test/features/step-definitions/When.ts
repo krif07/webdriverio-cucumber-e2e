@@ -1,4 +1,5 @@
 import {When} from "@wdio/cucumber-framework";
+import chai from "chai";
 
 When(/^I wait on the element "(.*)" to be displayed$/, async function(element){
     await $(element).waitForDisplayed();
@@ -68,4 +69,17 @@ When(/^I switch the window to "(.*)"$/, async function(windowName){
             break;
         }
     }
+});
+
+When(/^I (accept|cancel) the (alert) message$/, async function(action, alertType){
+    if(action === 'accept') {
+        await browser.acceptAlert();
+    }
+    else{
+        await browser.dismissAlert();
+    }
+});
+
+When(/^I enter the text "(.*)" to the alert$/, async function(text){
+    await browser.sendAlertText(text);
 });
