@@ -67,7 +67,7 @@ Feature: Web Interaction Feature
     And   I expect that the page title is "Elemental Selenium: Receive a Free, Weekly Tip on Using Selenium like a Pro"
     And   I expect that element "h2.subheader" contain the text "A free, once-weekly e-mail on how to use Selenium like a Pro"
 
-  @demo
+  @demo6
   Scenario: Web Interactions javascript alerts
     Given I open the page "/javascript_alerts"
     And   I wait on the element "div.example h3" to be displayed
@@ -92,3 +92,12 @@ Feature: Web Interaction Feature
     And   I enter the text "algo" to the alert
     And   I accept the alert message
     And   I expect that element "#result" contain the text "You entered: algo"
+
+  @demo
+  Scenario: Web Interactions upload files
+    Given I open the page "/upload"
+    And   I wait on the element "#file-submit" to be displayed
+    And   I upload a file "dummyFile.txt"
+    Then  I expect that element "h3" contain the text "File Uploaded!"
+
+

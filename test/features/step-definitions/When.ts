@@ -1,5 +1,6 @@
 import {When} from "@wdio/cucumber-framework";
 import chai from "chai";
+import path from "path";
 
 When(/^I wait on the element "(.*)" to be displayed$/, async function(element){
     await $(element).waitForDisplayed();
@@ -82,4 +83,12 @@ When(/^I (accept|cancel) the (alert) message$/, async function(action, alertType
 
 When(/^I enter the text "(.*)" to the alert$/, async function(text){
     await browser.sendAlertText(text);
+});
+
+When(/^I upload a file "(.*)"$/, async function(fileName){
+    const filePath = path.join(__dirname, `../../../data/${fileName}`);
+    //const filePath = path.join(process.cwd(), `../../../data/${fileName}`);
+    const remoteFilePath = await browser.uploadFile(filePath);
+    await $('#file-upload').setValue(remoteFilePath);
+    await $('#file-submit').click();
 });
