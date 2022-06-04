@@ -1,5 +1,6 @@
 import {Then} from "@wdio/cucumber-framework";
 import * as chai from "chai";
+import {TableObject} from "../../page-objects/table.object";
 
 Then(/^I expect that element "(.*)" contain the text "(.*)"$/, async function(element, text){
     let elementText = await $(element).getText();
@@ -57,8 +58,16 @@ Then(/^I expect that elements "(.*)" contain value (equal to|greater than|less t
         validNumbers = numberArr.filter(ele => ele < parseFloat(numberToAssert));
     }
 
+    console.log(`>>>>>>>>>>> numberArr: ${numberArr}`);
     console.log(`>>>>>>>>>>> validNumbers: ${validNumbers}`);
     console.log(`>>>>>>>>>>> strNumberArr: ${strNumberArr}`);
 
     chai.expect(validNumbers.length).to.equal(strNumberArr.length);
+});
+
+Then(/^I expect that the (sum) column (.*) of the table "(.*)" is (.*)$/,
+    async function(operation, column, table, expectedResult){
+    let tableObject = new TableObject(table);
+    let sum = await tableObject.getSumColumn(column);
+    chai.expect(sum).to.equal(parseFloat(expectedResult));
 });

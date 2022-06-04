@@ -129,3 +129,12 @@ Feature: Web Interaction Feature
     Given I open the page "/"
     And   I wait on the element "=WYSIWYG Editor" to be displayed
     When  I scroll into the element "=WYSIWYG Editor" to the top false
+
+  @demo
+  Scenario: Web Interactions Table
+    Given I open the page "/tables"
+    And   I wait on the element "#table1 tr" to be displayed
+    Then  I expect that element "//table[@id='table1']/tbody/tr" contain 4 items
+    And   I expect that element "//table[@id='table1']/thead/tr/th" contain 6 items
+    And   I expect that elements "//table[@id='table1']/tbody/tr/td[4]" contain value greater than 49
+    And   I expect that the sum column 4 of the table "//table[@id='table1']" is 251
