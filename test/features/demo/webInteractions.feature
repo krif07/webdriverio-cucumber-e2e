@@ -137,4 +137,5 @@ Feature: Web Interaction Feature
     Then  I expect that element "//table[@id='table1']/tbody/tr" contain 4 items
     And   I expect that element "//table[@id='table1']/thead/tr/th" contain 6 items
     And   I expect that elements "//table[@id='table1']/tbody/tr/td[4]" contain value greater than 49
+    And   I expect each value for the column 4 of the table "//table[@id='table1']" is greater than 49
     And   I expect that the sum column 4 of the table "//table[@id='table1']" is 251

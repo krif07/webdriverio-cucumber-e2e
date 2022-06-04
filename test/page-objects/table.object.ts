@@ -23,14 +23,36 @@ export class TableObject {
         return this.getCell(row, col).getText();
     }
     async getSumColumn(colNumber){
-        let sum = 0;
-        const rowNumber = await this.rowCount;
-        for(let i=0; i< rowNumber; i++){
+        const columnValuesArr = await this.getNumberElementsFromColumn(colNumber);
+        let sum = columnValuesArr.reduce((a, b) => a + b, 0);
+        return sum;
+    }
+    async getNumberElementsFromColumn(colNumber){
+        let columnValuesArr = [];
+        const totalRows = await this.rowCount;
+        for(let i=0; i<totalRows; i++){
             let val = await this.getCellValue(i+1, colNumber);
             val = val.replace('$', '');
-            sum += parseFloat(val);
+            columnValuesArr.push(parseFloat(val));
         }
-        return sum;
+        return columnValuesArr;
+    }
+    async compareEachColumnElementWithGivenValue(colNumber, compareType, expectedValue){
+        let validNumbers;
+        let numberArr = await this.getNumberElementsFromColumn(colNumber);
+
+        if(compareType === 'greater than') {
+            validNumbers = numberArr.filter(ele => ele > parseFloat(expectedValue));
+        }
+        else if(compareType === 'equal to'){
+            validNumbers = numberArr.filter(ele => ele == parseFloat(expectedValue));
+        }
+        else if(compareType === 'less than'){
+            validNumbers = numberArr.filter(ele => ele < parseFloat(expectedValue));
+        }
+        let totalRows = await this.rowCount;
+
+        return (validNumbers.length === totalRows);
     }
 
 }

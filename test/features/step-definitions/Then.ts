@@ -65,6 +65,13 @@ Then(/^I expect that elements "(.*)" contain value (equal to|greater than|less t
     chai.expect(validNumbers.length).to.equal(strNumberArr.length);
 });
 
+Then(/^I expect each value for the column (.*) of the table "(.*)" is (greater than) (.*)$/,
+    async function(column, table, compareType, expectedValue){
+    let tableObject = new TableObject(table);
+    let result = await tableObject.compareEachColumnElementWithGivenValue(column, compareType, expectedValue);
+    chai.expect(result).to.equal(true);
+});
+
 Then(/^I expect that the (sum) column (.*) of the table "(.*)" is (.*)$/,
     async function(operation, column, table, expectedResult){
     let tableObject = new TableObject(table);
