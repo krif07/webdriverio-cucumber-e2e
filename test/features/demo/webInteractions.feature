@@ -143,3 +143,4 @@ Feature: Web Interaction Feature
     And   I expect that the table "//table[@id='table1']" contains "Jason" in the column name "First Name"
     And   I expect that the table "//table[@id='table1']" contains "tconway@earthlink.net" in the column name "Email"
     And   I expect that the table "//table[@id='table2']" contains "Conway" in the column name "Last Name"
+    And   I expect that the table "//table[@id='table2']" contains "$50.00" in the column name "Due"
