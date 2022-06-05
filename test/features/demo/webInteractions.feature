@@ -139,8 +139,10 @@ Feature: Web Interaction Feature
     And   I expect that elements "//table[@id='table1']/tbody/tr/td[4]" contain value greater than 49
     And   I expect each value for the column 4 of the table "//table[@id='table1']" is greater than 49
     And   I expect that the sum column 4 of the table "//table[@id='table1']" is 251
-    And   I expect that the table "//table[@id='table1']" contains "Jason" in the column name "First Name"
-    And   I expect that the table "//table[@id='table1']" contains "Jason" in the column name "First Name"
-    And   I expect that the table "//table[@id='table1']" contains "tconway@earthlink.net" in the column name "Email"
-    And   I expect that the table "//table[@id='table2']" contains "Conway" in the column name "Last Name"
-    And   I expect that the table "//table[@id='table2']" contains "$50.00" in the column name "Due"
+    And   I expect that table "//table[@id='table1']" contains "Jason" in the column name "First Name"
+    And   I expect that table "//table[@id='table1']" contains "Jason" in the column name "First Name"
+    And   I expect that table "//table[@id='table1']" contains "tconway@earthlink.net" in the column name "Email"
+    And   I expect that table "//table[@id='table2']" contains "Conway" in the column name "Last Name"
+    And   I expect that table "//table[@id='table2']" contains "$50.00" in the column name "Due"
+    And   I expect that table "//table[@id='table1']" contains last name "Bach" first name "Frank" email "fbach@yahoo.com" due "$51.00" and web "http://www.frank.com" search by column "Last Name"
+    And   I expect that table "//table[@id='table2']" contains last name "Doe" first name "Jason" email "jdoe@hotmail.com" due "$100.00" and web "http://www.jdoe.com" search by column "Web Site"

@@ -40,6 +40,7 @@ export class TableObject {
                 break;
             }
         }
+        console.log(`>>>>>>>>>>>>>>>>>>>>>> <<<<<<<<<<<<<<<<<<<<<<<< columnNumber ${columnNumber}`)
         return columnNumber;
     }
     async getSumColumn(colNumber){
@@ -75,8 +76,14 @@ export class TableObject {
         return (validNumbers.length === totalRows);
     }
 
-    async getCellValueByColumnNameCondition(columnName, condition){
-        let rowNumber = 0;
+    /**
+     * Busca el número de la columna con el nombre de la columna
+     * luego busca un valor dentro de esa columna y devuelve la fila donde está ese valor
+     * @param columnName nombre de la columna donde buscar condition
+     * @param condition el valor en la columna
+     */
+    async getRowNumberByColumnNameAndCondition(columnName, condition){
+        let rowNumber = -1;
         const columnNumber = await this.getColumnNumberByName(columnName);
         const totalRows = await this.rowCount;
         for(let i=0; i<totalRows; i++){
@@ -87,7 +94,37 @@ export class TableObject {
             }
         }
 
+        return rowNumber;
+    }
+
+    async getCellValueByColumnNameCondition(columnName, condition){
+        const columnNumber = await this.getColumnNumberByName(columnName);
+        const rowNumber = await this.getRowNumberByColumnNameAndCondition(columnName, condition);
         return await this.getCellValue(rowNumber,columnNumber);
+    }
+
+    /**
+     * Busca el número de la fila con el nombre de la columna y el valor a buscar de esa columna
+     * luego crea un objeto con los valores de la fila
+     * @param columnName nombre de la columna donde buscar condition
+     * @param condition el valor en la columna
+     */
+    async getCellValueInObjectByColumnNameCondition(columnName, condition){
+        const rowNumber = await this.getRowNumberByColumnNameAndCondition(columnName, condition);
+        let personObj = {
+            lastName: "",
+            firstName: "",
+            email: "",
+            due: "",
+            web: ""
+        };
+       personObj.lastName = await this.getCellValue(rowNumber, 1);
+       personObj.firstName = await this.getCellValue(rowNumber, 2);
+       personObj.email = await this.getCellValue(rowNumber, 3);
+       personObj.due = await this.getCellValue(rowNumber, 4);
+       personObj.web = await this.getCellValue(rowNumber, 5);
+
+        return personObj;
     }
 
 }

@@ -79,10 +79,42 @@ Then(/^I expect that the (sum) column (.*) of the table "(.*)" is (.*)$/,
     chai.expect(sum).to.equal(parseFloat(expectedResult));
 });
 
-Then(/^I expect that the table "(.*)" contains "(.*)" in the column name "(.*)"$/,
+Then(/^I expect that table "(.*)" contains "(.*)" in the column name "(.*)"$/,
     async function(table, expectedValue, columnName){
     const tableObject = new TableObject(table);
     const cellValue = await tableObject.getCellValueByColumnNameCondition(columnName,expectedValue);
     console.log(`>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> cellValue - ${cellValue}`);
     chai.expect(cellValue).to.equal(expectedValue);
+});
+
+Then(/I expect that table "(.*)" contains last name "(.*)" first name "(.*)" email "(.*)" due "(.*)" and web "(.*)" search by column "(.*)"$/,
+    async function(table, ln, fn, email, due, web, columnToSearch){
+
+        let condition = "";
+        switch (columnToSearch){
+            case 'First Name':
+                condition = fn;
+                break;
+            case 'Last Name':
+                condition = ln;
+                break;
+            case 'Email':
+                condition = email;
+                break;
+            case 'Due':
+                condition = due;
+                break;
+            case 'Web Site':
+                condition = web;
+                break;
+        };
+
+        const tableObject = new TableObject(table);
+        const personObj = await tableObject.getCellValueInObjectByColumnNameCondition(columnToSearch, condition);
+        console.log(`>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> personObj - ${JSON.stringify(personObj)}`);
+        chai.expect(personObj.lastName).equal(ln);
+        chai.expect(personObj.firstName).equal(fn);
+        chai.expect(personObj.email).equal(email);
+        chai.expect(personObj.due).equal(due);
+        chai.expect(personObj.web).equal(web);
 });
