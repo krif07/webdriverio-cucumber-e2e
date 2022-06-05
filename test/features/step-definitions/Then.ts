@@ -78,3 +78,11 @@ Then(/^I expect that the (sum) column (.*) of the table "(.*)" is (.*)$/,
     let sum = await tableObject.getSumColumn(column);
     chai.expect(sum).to.equal(parseFloat(expectedResult));
 });
+
+Then(/^I expect that the table "(.*)" contains "(.*)" in the column name "(.*)"$/,
+    async function(table, expectedValue, columnName){
+    const tableObject = new TableObject(table);
+    const cellValue = await tableObject.getCellValueByColumnNameCondition(columnName,expectedValue);
+    console.log(`>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> cellValue - ${cellValue}`);
+    chai.expect(cellValue).to.equal(expectedValue);
+});

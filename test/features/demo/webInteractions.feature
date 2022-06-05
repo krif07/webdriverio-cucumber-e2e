@@ -139,3 +139,7 @@ Feature: Web Interaction Feature
     And   I expect that elements "//table[@id='table1']/tbody/tr/td[4]" contain value greater than 49
     And   I expect each value for the column 4 of the table "//table[@id='table1']" is greater than 49
     And   I expect that the sum column 4 of the table "//table[@id='table1']" is 251
+    And   I expect that the table "//table[@id='table1']" contains "Jason" in the column name "First Name"
+    And   I expect that the table "//table[@id='table1']" contains "Jason" in the column name "First Name"
+    And   I expect that the table "//table[@id='table1']" contains "tconway@earthlink.net" in the column name "Email"
+    And   I expect that the table "//table[@id='table2']" contains "Conway" in the column name "Last Name"
