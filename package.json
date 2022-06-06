@@ -5,7 +5,8 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "wdio": "npx wdio wdio.conf.ts"
+        "wdio": "npx wdio wdio.conf.ts",
+        "repl": "npx wdio repl chrome"
     },
     "keywords": [
         "wdio",
