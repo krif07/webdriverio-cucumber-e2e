@@ -175,3 +175,7 @@ When(/^I reload the browser$/, async function(){
 When(/^I refresh the browser$/, async function(){
     await browser.refresh();
 });
+
+When(/^I go back page$/, async function(){
+    await browser.back();
+});
