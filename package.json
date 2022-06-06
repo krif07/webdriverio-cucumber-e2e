@@ -6,6 +6,8 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "wdio": "npx wdio wdio.conf.ts",
+        "demo": "npx wdio wdio.conf.ts --cucumberOpts.tagExpresion='@demo'",
+        "sauceDemo": "npx wdio wdio.conf.ts --cucumberOpts.tagExpresion='@sauceDemo'",
         "repl": "npx wdio repl chrome"
     },
     "keywords": [
