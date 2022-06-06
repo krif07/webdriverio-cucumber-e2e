@@ -159,7 +159,7 @@ Feature: Web Interaction Feature
     And   I scroll up the page
     And   I pause 2000
 
-  @demo
+  @demo13
   Scenario: Web Interactions Waits
     Given I open the page "/"
     And   I wait until the browser title "The Internet" get changed

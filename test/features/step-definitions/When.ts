@@ -161,3 +161,17 @@ When(/^I wait until a web element "(.*)" value "(.*)" is changed$/, async functi
 When(/^I wait until a field has text value loaded$/, async function(){
 
 });
+
+/**
+ * The browser start again, create a new session with the current capabilities
+ */
+When(/^I reload the browser$/, async function(){
+    await browser.reloadSession();
+});
+
+/**
+ * refresh the page
+ */
+When(/^I refresh the browser$/, async function(){
+    await browser.refresh();
+});
