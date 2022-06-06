@@ -1,6 +1,8 @@
 import 'dotenv/config'
 import type { Options } from '@wdio/types'
 
+let headless = process.env.HEADLESS;
+
 export const config: Options.Testrunner = {
     //
     // ====================
@@ -87,10 +89,25 @@ export const config: Options.Testrunner = {
         maxInstances: 5,
         //
         // disable ssl security in chrome
+        /**
+         * "--disable-web-security",
+         "--headless",
+         "--disable-dev-shm-usage",
+         "--no-sandbox",
+         "--window-size=1920,1080",
+         "--disable-gpu",
+         "--proxy-server=http://domain",
+         "--auth-server-whitelist='_'"
+         */
         "goog:chromeOptions": {
-            args: [
-                "--disable-web-security"
-            ]
+            args: headless.toUpperCase() === "YES" ? [
+                "--disable-web-security",
+                "--headless",
+                "--disable-dev-shm-usage",
+                "--no-sandbox",
+                "--window-size=1920,1080",
+                "--disable-gpu"
+            ] : []
         },
         browserName: 'chrome',
         acceptInsecureCerts: true,

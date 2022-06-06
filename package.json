@@ -7,7 +7,7 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "wdio": "npx wdio wdio.conf.ts",
         "tag": "npx wdio wdio.conf.ts --cucumberOpts.tagExpression",
-        "demo": "npx wdio wdio.conf.ts --cucumberOpts.tagExpression='@demo'",
+        "demo": "HEADLESS=N && npx wdio wdio.conf.ts --cucumberOpts.tagExpression='@demo'",
         "repl": "npx wdio repl chrome"
     },
     "keywords": [
