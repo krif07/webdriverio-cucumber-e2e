@@ -12,7 +12,7 @@ Feature: Sauce Demo Tests
       | standard_user  | secret_sauce | 6             |
       #| problem_user   | secret_sauce | 6             |
 
-  @demo
+  @sauceDemo
   Scenario Outline: Validate different login sessions in the same try
     Given I login into sauce demo page with user "<userName>" and password "<password>"
     And   I wait on the element ".inventory_list" to be displayed
