@@ -1,0 +1,25 @@
+{
+  "sessionId": "aa7b67f76ab499a32368b8fda14a1468",
+  "capabilities": {
+    "acceptInsecureCerts": true,
+    "browserName": "chrome",
+    "browserVersion": "102.0.5005.63",
+    "chrome": {
+      "chromedriverVersion": "101.0.4951.41 (93c720db8323b3ec10d056025ab95c2
+      3a31997c9-refs/branch-heads/4951@{
+  #904})","userDataDir":"C: \\Users\\krif0\\AppData\\Local\\Temp\\scoped_dir5236_1923526021"},
+"goog: chromeOptions": {
+"debuggerAddress":"localhost: 64067"
+},
+"networkConnectionEnabled": false, "pageLoadStrategy": "normal", "platformName": "windows", "proxy": {},
+"setWindowRect": true, "strictFileInteractability": false,
+"timeouts":{"implicit": 15000, "pageLoad": 20000, "script": 30000},
+"unhandledPromptBehavior": "dismiss and notify", "webauthn: extension:credBlob":true, "webauthn: extension: largeBlob": true, "webauthn:virtualAuthenticators": true}, "config": {"specs":["./test/features/**/*.feature"], "suites": {}, "exclude":[], "logLevel": "info", "logLevels": {},"excludeDriverLogs":[], "bail": 0,
+"waitforInterval": 500, "waitforTimeout": 10000, "framework": "cucumber", "reporters":["spec",["allure", {"outputDir": "allure-results"}]], "services":["chromedriver"], "maxInstances": 10, "maxInstancesPerCapability": 100, "filesToWatch":[], "conn
+ectionRetryTimeout":120000,"connectionRetryCount":3,"execArgv":[],"runnerEnv":{},"runner":"local","specFileRetries":0,"specFileRetriesDelay":0,"specFileRetriesDeferred":false,"reporterSyncInterval":100,"reporterSyncTimeout":5000,"cu
+cumberFeaturesWithLineNumbers":[],"autoCompileOpts":{"autoCompile":true,"tsNodeOpts":{"transpileOnly":true,"project":"tsconfig.json"},"babelOpts":{}},"mochaOpts":{"timeout":10000},"jasmineOpts":{"defaultTimeoutInterval":10000},"cucu
+mberOpts":{"timeout":300000,"require":["./test/features/step-definitions/*.ts"],"backtrace":false,"requireModule":[],"dryRun":false,"failFast":false,"snippets":true,"source":true,"strict":false,"tagExpression":"@demo","ignoreUndefin
+edDefinitions":false},"onPrepare":[],"onWorkerStart":[],"onWorkerEnd":[],"before":[],"beforeSession":[],"beforeSuite":[],"beforeHook":[],"beforeTest":[],"beforeCommand":[],"afterCommand":[],"afterTest":[],"afterHook":[],"afterSuite":[], "afterSession":[], "after":[], "onComplete":[], "onReload":[], "beforeFeature":[], "beforeScenario":[], "beforeStep":[], "afterStep":[], "afterScenario":[], "afterFeature":[], "baseUrl": "https: //the-internet.herokuapp.com", "_":[
+"wdio.conf.ts"], "$0": "node_modules\\@wdio\\cli\\bin\\wdio.js", "ignoredWorkerServices":[]
+}
+}

@@ -130,7 +130,7 @@ Feature: Web Interaction Feature
     And   I wait on the element "=WYSIWYG Editor" to be displayed
     When  I scroll into the element "=WYSIWYG Editor" to the top false
 
-  @demo
+  @demo11
   Scenario: Web Interactions Table
     Given I open the page "/tables"
     And   I wait on the element "#table1 tr" to be displayed
@@ -146,3 +146,24 @@ Feature: Web Interaction Feature
     And   I expect that table "//table[@id='table2']" contains "$50.00" in the column name "Due"
     And   I expect that table "//table[@id='table1']" contains last name "Bach" first name "Frank" email "fbach@yahoo.com" due "$51.00" and web "http://www.frank.com" search by column "Last Name"
     And   I expect that table "//table[@id='table2']" contains last name "Doe" first name "Jason" email "jdoe@hotmail.com" due "$100.00" and web "http://www.jdoe.com" search by column "Web Site"
+
+  @demo12
+  Scenario: Web Interactions Scroll
+    Given I open the page "/"
+    When  I scroll down the visible page
+    And   I pause 2000
+    And   I scroll up the visible page
+    And   I pause 2000
+    And   I scroll down the page
+    And   I pause 2000
+    And   I scroll up the page
+    And   I pause 2000
+
+  @demo
+  Scenario: Web Interactions Waits
+    Given I open the page "/"
+    And   I wait until the browser title "The Internet" get changed
+    When  I scroll down the visible page
+    And   I pause 2000
+    And   I scroll up the visible page
+    And   I pause 2000

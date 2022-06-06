@@ -1,4 +1,4 @@
-import {When} from "@wdio/cucumber-framework";
+import {Then, When} from "@wdio/cucumber-framework";
 import chai from "chai";
 import path from "path";
 
@@ -112,4 +112,52 @@ When(/^I use two key values "(.*)" "(.*)"$/, async function(keyValue1, keyValue2
 
 When(/^I scroll into the element "(.*)" to the top (true|false)$/, async function(element, onTop){
     await $(element).scrollIntoView(onTop);
+});
+
+When(/^I pause (.*)$/, async function(timeMs){
+    await browser.pause(timeMs);
+});
+
+/**
+ * scrollBy(horizontal, vertical)
+ * innerHeight -> hasta el final visible de la pag hacia abajo
+ */
+When(/^I scroll down the visible page$/, async function(){
+    await browser.execute(() =>{
+        window.scrollBy(0, window.innerHeight);
+    });
+});
+
+When(/^I scroll up the visible page$/, async function(){
+    await browser.execute(() =>{
+        window.scrollBy(0, -window.innerHeight);
+    });
+});
+
+When(/^I scroll down the page$/, async function(){
+    await browser.execute(() =>{
+        window.scrollTo(0, document.body.scrollHeight);
+    });
+});
+
+When(/^I scroll up the page$/, async function(){
+    await browser.execute(() =>{
+        window.scrollTo(0, document.body.scrollTop);
+    });
+});
+
+When(/^I wait until the browser title "(.*)" get changed$/, async function(pageTitle){
+    await browser.waitUntil(async function(){
+        return await browser.getTitle() === pageTitle
+    }, {timeout: 10000, interval: 500, timeoutMsg: `Filed loading web page: ${await browser.getTitle()}`});
+});
+
+When(/^I wait until a web element "(.*)" value "(.*)" is changed$/, async function(element, newValue){
+    browser.waitUntil(async function(){
+        return await $(element).getValue() === newValue
+    }, {timeout: 10000, interval: 500, timeoutMsg: `Filed loading web element, value: ${await $(element).getValue()}`});
+});
+
+When(/^I wait until a field has text value loaded$/, async function(){
+
 });
