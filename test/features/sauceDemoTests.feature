@@ -33,3 +33,12 @@ Feature: Sauce Demo Tests
     Examples:
       | userName       | password     | numberOfItems |
       | standard_user  | secret_sauce | 6             |
+
+  @sauceDemo3
+  Scenario: Validate different login sessions in the same try
+    Given I check the sauce demo login page with different users
+      | userName         | password     |
+      | standard_user    | secret_sauce |
+      | problem_user     | secret_sauce |
+      | locked_out_user  | secret_sauce |
+
