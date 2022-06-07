@@ -43,3 +43,9 @@ Feature: Sauce Demo Tests
       | locked_out_user  | secret_sauce |
     # fail step to get the screen shot in after step hook function
     #Then I expect that element ".inventory_details_name.large_size" contain the text "Sauce Labs Fleece Jacket"
+
+  @sauceDemo4
+  Scenario: Validate different login sessions in the same try
+    Given I login into sauce demo page with user "standard_user" and password "secret_sauce"
+    And   I wait on the element ".inventory_list" to be displayed
+    Then  I expect that element ".inventory_item" contain 6 items

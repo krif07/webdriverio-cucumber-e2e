@@ -33,6 +33,7 @@ Then(/^I expect that (alert) text is "(.*)"$/, async function(alertType, text){
 Then(/^I expect that element "(.*)" contain (.*) items$/, async function(element, numberOfItems){
     let listOfItems = await $$(element);
     chai.expect(listOfItems.length).to.equal(parseInt(numberOfItems));
+    console.log(`>>>>>>>>>>>>>>>>>>>>>>>>> App Id ${this.appId}`)
 });
 
 Then(/^I expect that elements "(.*)" contain value (equal to|greater than|less than) (.*)$/,

@@ -4,6 +4,7 @@ import path from "path";
 
 When(/^I wait on the element "(.*)" to be displayed$/, async function(element){
     await $(element).waitForDisplayed();
+    console.log(`>>>>>>>>>>>>>>>>>>>>>>>>> App Id ${this.appId}`)
 });
 
 When(/^I click on the element "(.*)"$/, async function(element){
