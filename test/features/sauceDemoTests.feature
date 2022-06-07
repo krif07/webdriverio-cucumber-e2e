@@ -1,6 +1,6 @@
 Feature: Sauce Demo Tests
 
-  @sauceDemo
+  @sauceDemo @sauceDemo1
   Scenario Outline: Validate the products price
     Given I login into sauce demo page with user "<userName>" and password "<password>"
     And   I wait on the element ".inventory_list" to be displayed
@@ -12,7 +12,7 @@ Feature: Sauce Demo Tests
       | standard_user  | secret_sauce | 6             |
       #| problem_user   | secret_sauce | 6             |
 
-  @sauceDemo
+  @sauceDemo @sauceDemo2
   Scenario Outline: Validate different login sessions in the same try
     Given I login into sauce demo page with user "<userName>" and password "<password>"
     And   I wait on the element ".inventory_list" to be displayed
