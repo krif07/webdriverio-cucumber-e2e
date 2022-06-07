@@ -41,4 +41,5 @@ Feature: Sauce Demo Tests
       | standard_user    | secret_sauce |
       | problem_user     | secret_sauce |
       | locked_out_user  | secret_sauce |
-
+    # fail step to get the screen shot in after step hook function
+    #Then I expect that element ".inventory_details_name.large_size" contain the text "Sauce Labs Fleece Jacket"

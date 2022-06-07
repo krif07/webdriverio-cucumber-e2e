@@ -314,8 +314,15 @@ export const config: Options.Testrunner = {
      * @param {number}             result.duration  duration of scenario in milliseconds
      * @param {Object}             context          Cucumber World object
      */
-    // afterStep: function (step, scenario, result, context) {
-    // },
+     afterStep: async function (step, scenario, result, context) {
+        console.log(`>>>>>>>>>>>>>> step ${JSON.stringify(step)}`);
+        console.log(`>>>>>>>>>>>>>> scenario ${JSON.stringify(scenario)}`);
+        console.log(`>>>>>>>>>>>>>> result ${JSON.stringify(result)}`);
+        console.log(`>>>>>>>>>>>>>> context ${JSON.stringify(context)}`);
+        if(!result.passed){
+            await browser.takeScreenshot();
+        }
+     },
     /**
      *
      * Runs after a Cucumber Scenario.
