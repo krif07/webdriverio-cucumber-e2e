@@ -10,6 +10,7 @@
         "sauce:tag": "npx wdio config/wdio.saucedemo.conf.ts --cucumberOpts.tagExpression",
         "test:demo": "npx wdio config/wdio.test.conf.ts --cucumberOpts.tagExpression='@demo' > output.log",
         "sauce:demo": "npx wdio config/wdio.saucedemo.conf.ts --cucumberOpts.tagExpression='@sauceDemo' > output.log",
+        "allure": "allure serve",
         "repl": "npx wdio repl chrome"
     },
     "keywords": [
