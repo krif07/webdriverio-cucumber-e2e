@@ -1,6 +1,7 @@
 import {Then} from "@wdio/cucumber-framework";
 import * as chai from "chai";
 import {TableObject} from "../../page-objects/table.object";
+import logger from "../../helper/logger";
 
 Then(/^I expect that element "(.*)" contain the text "(.*)"$/, async function(element, text){
     let elementText = await $(element).getText();
@@ -31,6 +32,7 @@ Then(/^I expect that (alert) text is "(.*)"$/, async function(alertType, text){
 });
 
 Then(/^I expect that element "(.*)" contain (.*) items$/, async function(element, numberOfItems){
+    logger.info(`${global.testId}: Checking the element ${element} contains numberOfItems ${numberOfItems} <<<<<<<<<<<<<<`);
     let listOfItems = await $$(element);
     chai.expect(listOfItems.length).to.equal(parseInt(numberOfItems));
     console.log(`>>>>>>>>>>>>>>>>>>>>>>>>> App Id ${this.appId}`)

@@ -1,8 +1,10 @@
 import {Then, When} from "@wdio/cucumber-framework";
 import chai from "chai";
 import path from "path";
+import logger from "../../helper/logger";
 
 When(/^I wait on the element "(.*)" to be displayed$/, async function(element){
+    logger.info(`${global.testId}: Waiting the element ${element} to be displayed <<<<<<<<<<`);
     await $(element).waitForDisplayed();
     console.log(`>>>>>>>>>>>>>>>>>>>>>>>>> App Id ${this.appId}`)
 });

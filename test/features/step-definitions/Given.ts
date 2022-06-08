@@ -1,5 +1,6 @@
 import {Given} from "@wdio/cucumber-framework";
 import sauceDemoLoginPage from "../../page-objects/sauceDemoLogin.page";
+import logger from "../../helper/logger";
 
 Given(/^I open the page "(.*)"$/, async function(url){
     await browser.url(url);
@@ -20,6 +21,7 @@ Given(/^I login into sauce demo page with user "(.*)" and password "(.*)"$/, asy
 });
 
 Given(/^I check the sauce demo login page with different users$/, async function(dataTable){
+    logger.info(`${global.testId}: Started to login sauce demo app....`);
     console.log(`>>>>>>>>>>>>>>> testId: ${global.testId}`)
     console.log(`>>>>>>>>>>>>>>> dataTable ${JSON.stringify(dataTable)}`)
     let dt = dataTable.hashes();

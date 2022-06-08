@@ -5,11 +5,11 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "wdio": "npx wdio wdio.conf.ts",
+        "wdio": "npx wdio wdio.conf.ts > output.log",
         "test:tag": "npx wdio wdio.conf.ts --cucumberOpts.tagExpression",
         "sauce:tag": "npx wdio config/wdio.saucedemo.conf.ts --cucumberOpts.tagExpression",
-        "test:demo": "npx wdio config/wdio.test.conf.ts --cucumberOpts.tagExpression='@demo'",
-        "sauce:demo": "npx wdio config/wdio.saucedemo.conf.ts --cucumberOpts.tagExpression='@sauceDemo'",
+        "test:demo": "npx wdio config/wdio.test.conf.ts --cucumberOpts.tagExpression='@demo' > output.log",
+        "sauce:demo": "npx wdio config/wdio.saucedemo.conf.ts --cucumberOpts.tagExpression='@sauceDemo' > output.log",
         "repl": "npx wdio repl chrome"
     },
     "keywords": [
@@ -32,7 +32,8 @@
         "prettier": "2.6.2",
         "ts-node": "^10.8.0",
         "typescript": "^4.7.2",
-        "wdio-chromedriver-service": "^7.3.2"
+        "wdio-chromedriver-service": "^7.3.2",
+        "winston": "^3.7.2"
     },
     "dependencies": {
         "dotenv": "^16.0.1"
