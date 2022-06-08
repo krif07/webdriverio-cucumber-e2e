@@ -1,6 +1,7 @@
 import 'dotenv/config'
 import type { Options } from '@wdio/types'
 import allure from '@wdio/allure-reporter';
+import reporter from "./test/helper/reporter";
 import fs from 'fs';
 
 let headless = process.env.HEADLESS;
@@ -339,6 +340,7 @@ export const config: Options.Testrunner = {
         console.log(`>>>>>>>>>>>>>> context ${JSON.stringify(context)}`);*/
         if(!result.passed){
             await browser.takeScreenshot();
+            reporter.addStep(global.testId, "error", result.error)
         }
      },
     /**

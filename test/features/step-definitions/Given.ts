@@ -1,6 +1,7 @@
 import {Given} from "@wdio/cucumber-framework";
 import sauceDemoLoginPage from "../../page-objects/sauceDemoLogin.page";
 import logger from "../../helper/logger";
+import reporter from "../../helper/reporter";
 
 Given(/^I open the page "(.*)"$/, async function(url){
     await browser.url(url);
@@ -14,6 +15,7 @@ Given(/^I open the web page$/, async function(url){
 });
 
 Given(/^I login into sauce demo page with user "(.*)" and password "(.*)"$/, async function(user, password){
+    reporter.addStep(global.testId, "info",`Login into sauce demo with user ${user} and pass ${password}`);
     await sauceDemoLoginPage.open();
     await sauceDemoLoginPage.submitForm(user, password);
     this.appId = "SauceDemoAppId_001";
