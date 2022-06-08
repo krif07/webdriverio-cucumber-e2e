@@ -48,7 +48,7 @@ Feature: Sauce Demo Tests
   Scenario Outline: <testId>: Validate different login sessions in the same try
     Given I login into sauce demo page with user "<userName>" and password "<password>"
     When  I wait on the element ".inventory_list" to be displayed
-    Then  I expect that element ".inventory_item" contain 7 items
+    Then  I expect that element ".inventory_item" contain 6 items
 
     Examples:
       | testId       | userName       | password     |
