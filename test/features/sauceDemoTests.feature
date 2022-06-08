@@ -2,19 +2,19 @@
 Feature: Sauce Demo Tests
 
   @sauceDemo1
-  Scenario Outline: Validate the products price
+  Scenario Outline: <testId>: Validate the products price
     Given I login into sauce demo page with user "<userName>" and password "<password>"
     And   I wait on the element ".inventory_list" to be displayed
     Then  I expect that element ".inventory_item" contain <numberOfItems> items
     And   I expect that elements ".inventory_item_price" contain value greater than 0
 
     Examples:
-      | userName       | password     | numberOfItems |
-      | standard_user  | secret_sauce | 6             |
+      | testId       | userName       | password     | numberOfItems |
+      | sauceDemo001 | standard_user  | secret_sauce | 6             |
       #| problem_user   | secret_sauce | 6             |
 
   @sauceDemo2
-  Scenario Outline: Validate different login sessions in the same try
+  Scenario Outline: <testId>: Validate different login sessions in the same try
     Given I login into sauce demo page with user "<userName>" and password "<password>"
     And   I wait on the element ".inventory_list" to be displayed
     Then  I expect that element ".inventory_item" contain <numberOfItems> items
@@ -31,11 +31,11 @@ Feature: Sauce Demo Tests
     And   I expect that element "#item_4_title_link div.inventory_item_name" contain the text "Sauce Labs Backpack"
 
     Examples:
-      | userName       | password     | numberOfItems |
-      | standard_user  | secret_sauce | 6             |
+      | testId       | userName       | password     | numberOfItems |
+      | sauceDemo002 | standard_user  | secret_sauce | 6             |
 
   @sauceDemo3
-  Scenario: Validate different login sessions in the same try
+  Scenario: sauceDemo003: Validate different login sessions in the same try
     Given I check the sauce demo login page with different users
       | userName         | password     |
       | standard_user    | secret_sauce |
@@ -45,7 +45,13 @@ Feature: Sauce Demo Tests
     #Then I expect that element ".inventory_details_name.large_size" contain the text "Sauce Labs Fleece Jacket"
 
   @sauceDemo4
-  Scenario: Validate different login sessions in the same try
-    Given I login into sauce demo page with user "standard_user" and password "secret_sauce"
+  Scenario Outline: <testId>: Validate different login sessions in the same try
+    Given I login into sauce demo page with user "<userName>" and password "<password>"
     And   I wait on the element ".inventory_list" to be displayed
     Then  I expect that element ".inventory_item" contain 6 items
+
+    Examples:
+      | testId       | userName       | password     |
+      | sauceDemo003 | standard_user  | secret_sauce |
+      | sauceDemo004 | standard_user  | secret_sauce |
+      | sauceDemo005 | standard_user  | secret_sauce |

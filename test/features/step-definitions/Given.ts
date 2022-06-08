@@ -16,9 +16,11 @@ Given(/^I login into sauce demo page with user "(.*)" and password "(.*)"$/, asy
     await sauceDemoLoginPage.open();
     await sauceDemoLoginPage.submitForm(user, password);
     this.appId = "SauceDemoAppId_001";
+    console.log(`>>>>>>>>>>>>> testId: ${global.testId}`)
 });
 
 Given(/^I check the sauce demo login page with different users$/, async function(dataTable){
+    console.log(`>>>>>>>>>>>>>>> testId: ${global.testId}`)
     console.log(`>>>>>>>>>>>>>>> dataTable ${JSON.stringify(dataTable)}`)
     let dt = dataTable.hashes();
     console.log(`>>>>>>>>>>>>>>> dt ${JSON.stringify(dt)}`)
