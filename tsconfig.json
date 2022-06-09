@@ -1,6 +1,8 @@
 {
     "compilerOptions": {
         "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "suppressExcessPropertyErrors": true,
         "types": [
             "node",
             "webdriverio/async",

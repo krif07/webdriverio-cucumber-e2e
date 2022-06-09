@@ -1,5 +1,5 @@
 import {Given} from "@wdio/cucumber-framework";
-import sauceDemoLoginPage from "../../page-objects/sauceDemoLogin.page";
+import sauceHomePage from '../../page-objects/sauce.home.page';
 import logger from "../../helper/logger";
 import reporter from "../../helper/reporter";
 
@@ -16,8 +16,9 @@ Given(/^I open the web page$/, async function(url){
 
 Given(/^I login into sauce demo page with user "(.*)" and password "(.*)"$/, async function(user, password){
     reporter.addStep(global.testId, "info",`Login into sauce demo with user ${user} and pass ${password}`);
-    await sauceDemoLoginPage.open();
-    await sauceDemoLoginPage.submitForm(user, password);
+    await sauceHomePage.open("/");
+    await sauceHomePage.loginToSauceDemo(user, password);
+
     this.appId = "SauceDemoAppId_001";
     console.log(`>>>>>>>>>>>>> testId: ${global.testId}`)
 });
@@ -29,10 +30,10 @@ Given(/^I check the sauce demo login page with different users$/, async function
     let dt = dataTable.hashes();
     console.log(`>>>>>>>>>>>>>>> dt ${JSON.stringify(dt)}`)
 
-    await sauceDemoLoginPage.open();
+    await sauceHomePage.open("/");
     for(let i=0; i<dt.length; i++) {
         console.log(`>>>>>>>>>>>>>>> dataTable ${dt[i].userName} - ${dt[i].password}`)
-        await sauceDemoLoginPage.submitForm(dt[i].userName, dt[i].password);
+        await sauceHomePage.loginToSauceDemo(dt[i].userName, dt[i].password);
         await browser.back();
         await browser.refresh();
     }
