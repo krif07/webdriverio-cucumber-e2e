@@ -138,7 +138,7 @@ Then(/^I expect the (user) with name "(.*)" exist in Get API ReqRes.in$/,
     async function(typeOfReq, name){
         if(typeOfReq === 'user') {
             let exist = false;
-            let totalPage = GetUsers.per_page;
+            let totalPage = GetUsers.data.length;
             for(let i=0; i<totalPage; i++){
                 if(GetUsers.data[i].first_name === name){
                     exist = true;
