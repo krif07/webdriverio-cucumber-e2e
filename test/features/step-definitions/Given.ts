@@ -26,6 +26,17 @@ Given(/^I login into sauce demo page with user "(.*)" and password "(.*)"$/, asy
     console.log(`>>>>>>>>>>>>> testId: ${global.testId}`)
 });
 
+Given(/^I login into sauce demo page as a (.*)$/, async function(typeOfUser){
+    let user = process.env[`SAUCE_${typeOfUser.trim()}_USERNAME`];
+    let password = process.env[`SAUCE_${typeOfUser.trim()}_PASSWORD`];
+    reporter.addStep(global.testId, "info",`Login into sauce demo with user ${user} and pass ${password}`);
+    await sauceHomePage.open("/");
+    await sauceHomePage.loginToSauceDemo(user, password);
+
+    this.appId = "SauceDemoAppId_001";
+    console.log(`>>>>>>>>>>>>> testId: ${global.testId}`)
+});
+
 Given(/^I check the sauce demo login page with different users$/, async function(dataTable){
     logger.info(`${global.testId}: Started to login sauce demo app....`);
     console.log(`>>>>>>>>>>>>>>> testId: ${global.testId}`)

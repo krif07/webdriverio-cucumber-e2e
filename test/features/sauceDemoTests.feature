@@ -55,3 +55,14 @@ Feature: Sauce Demo Tests
       | sauceDemo003 | standard_user  | secret_sauce |
       | sauceDemo004 | standard_user  | secret_sauce |
       | sauceDemo005 | standard_user  | secret_sauce |
+
+  @sauceDemo5
+  Scenario Outline: <testId>: Validate different login sessions in the same try
+    Given I login into sauce demo page as a <userName>
+    #When  I wait on the element ".inventory_list" to be displayed
+
+    Examples:
+      | testId       | userName        |
+      | sauceDemo006 | standard_user   |
+      | sauceDemo007 | problem_user    |
+      | sauceDemo008 | locked_out_user |
