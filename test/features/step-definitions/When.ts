@@ -1,7 +1,9 @@
-import {Then, When} from "@wdio/cucumber-framework";
-import chai from "chai";
+import {When} from "@wdio/cucumber-framework";
 import path from "path";
 import logger from "../../helper/logger";
+import reqResObject from "../../page-objects/reqRes.object";
+import reporter from "../../helper/reporter";
+import fs from "fs";
 
 When(/^I wait on the element "(.*)" to be displayed$/, async function(element){
     logger.info(`${global.testId}: Waiting the element ${element} to be displayed <<<<<<<<<<`);
@@ -181,4 +183,14 @@ When(/^I refresh the browser$/, async function(){
 
 When(/^I go back page$/, async function(){
     await browser.back();
+});
+When(/^I get a list of (users) from the API ReqRes.in$/, async function(typeOfReq){
+    let response = await reqResObject.GET(typeOfReq);
+    //chai.expect(response.status).equal(200);
+    if(response.status === 200) {
+        let data = JSON.stringify(response.body)
+        reporter.addStep(global.testId, "info", `API GET response received, data: ${data}`);
+        const filePath = path.join(__dirname, `../../../data/reqres-api-responses/users/GETUsers.json`);
+        await fs.writeFileSync(filePath, data);
+    }
 });

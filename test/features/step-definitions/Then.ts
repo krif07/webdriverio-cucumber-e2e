@@ -3,6 +3,8 @@ import * as chai from "chai";
 import {TableObject} from "../../page-objects/table.object";
 import logger from "../../helper/logger";
 import reporter from "../../helper/reporter";
+import PostUser from "../../../data/reqres-api-responses/users/POSTUser.json";
+import GetUsers from "../../../data/reqres-api-responses/users/GETUsers.json";
 
 Then(/^I expect that element "(.*)" contain the text "(.*)"$/, async function(element, text){
     let elementText = await $(element).getText();
@@ -122,4 +124,26 @@ Then(/I expect that table "(.*)" contains last name "(.*)" first name "(.*)" ema
         chai.expect(personObj.email).equal(email);
         chai.expect(personObj.due).equal(due);
         chai.expect(personObj.web).equal(web);
+});
+Then(/^I expect the (user) with name "(.*)" and job "(.*)" was saved in the API ReqRes.in$/,
+    async function(typeOfReq, name, job){
+    if(typeOfReq === 'user') {
+        chai.expect(PostUser.id).to.exist;
+        chai.expect(name).to.equal(PostUser.name);
+        chai.expect(job).to.equal(PostUser.job);
+    }
+});
+
+Then(/^I expect the (user) with name "(.*)" and job "(.*)" exist in Get API ReqRes.in$/,
+    async function(typeOfReq, name, job){
+        if(typeOfReq === 'user') {
+            let exist = false;
+            let totalPage = GetUsers.per_page;
+            for(let i=0; i<totalPage; i++){
+                if(GetUsers.data[i].first_name === name){
+                    exist = true;
+                }
+            }
+            chai.expect(exist).to.true;
+        }
 });

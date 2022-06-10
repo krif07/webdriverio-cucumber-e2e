@@ -1,12 +1,10 @@
 import {Given} from "@wdio/cucumber-framework";
-import * as chai from "chai";
 import sauceHomePage from '../../page-objects/sauce.home.page';
 import logger from "../../helper/logger";
 import reporter from "../../helper/reporter";
-import apiHelper from "../../helper/apiHelper";
-import constants from "../../../data/constants.json";
 import fs from "fs";
 import path from "path";
+import reqResObject from "../../page-objects/reqRes.object";
 
 Given(/^I open the page "(.*)"$/, async function(url){
     await browser.url(url);
@@ -44,26 +42,22 @@ Given(/^I check the sauce demo login page with different users$/, async function
     }
 });
 
-Given(/^I get a list of (users) from the API ReqRes.in$/, async function(typeOfReq){
-    reporter.addStep(global.testId, "info", `Getting the payload data for the endpoint ${typeOfReq}`);
-    let baseUrl = process.env.BASEAPIURL;
-    let endPoint = "";
-    if(typeOfReq === 'users') {
-        endPoint = constants.REQRES.GET_USERS;
+Given(/^I save a (user) with name "(.*)" and job "(.*)" in the API ReqRes.in$/,
+    async function(typeOfReq: string, name: string, job: string){
+    let payload = {
+        name: name,
+        job: job
+    };
+    let response = await reqResObject.POST(typeOfReq, payload);
+    if(response.status === 201){
+        let data = JSON.stringify(response.body)
+        reporter.addStep(global.testId, "info", `API POST response received, data: ${data}`);
+        const filePath = path.join(__dirname, `../../../data/reqres-api-responses/users/POSTUser.json`);
+        if(process.env.RUNNER === 'LOCAL' && fs.existsSync(filePath)){
+            await fs.rmSync(filePath, {recursive: true});
+            await browser.pause(3000);
+        }
+        await fs.writeFileSync(filePath, data);
     }
-    let authToken = "";
-    let queryParam = constants.REQRES.QUERY_PARAM;
-    //let response = await apiHelper.GET(global.testId, baseUrl, endPoint, authToken, queryParam);
-    let response = await browser.call(async function(){
-        return await apiHelper.GET(global.testId, baseUrl, endPoint, authToken, queryParam)
-    });
-    logger.info(`>>>>>>>>>>>>>>>>>>> response : ${JSON.stringify(response)}`);
-    chai.expect(response.status).equal(200);
-
-    let data = JSON.stringify(response.body)
-    reporter.addStep(global.testId, "info", `API response received, data: ${data}`);
-    const filePath = path.join(__dirname, `../../../data/api-res/reqresAPIUsers.json`);
-
-    fs.writeFileSync(filePath, data);
-    reporter.addStep(global.testId, "info", `API response from ${endPoint} stored in json file`);
 });
+
