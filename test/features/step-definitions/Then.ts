@@ -3,7 +3,6 @@ import * as chai from "chai";
 import {TableObject} from "../../page-objects/table.object";
 import logger from "../../helper/logger";
 import reporter from "../../helper/reporter";
-import PostUser from "../../../data/reqres-api-responses/users/POSTUser.json";
 import GetUsers from "../../../data/reqres-api-responses/users/GETUsers.json";
 
 Then(/^I expect that element "(.*)" contain the text "(.*)"$/, async function(element, text){
@@ -127,15 +126,16 @@ Then(/I expect that table "(.*)" contains last name "(.*)" first name "(.*)" ema
 });
 Then(/^I expect the (user) with name "(.*)" and job "(.*)" was saved in the API ReqRes.in$/,
     async function(typeOfReq, name, job){
+    let data = JSON.parse(await global.post_user_data);
     if(typeOfReq === 'user') {
-        chai.expect(PostUser.id).to.exist;
-        chai.expect(name).to.equal(PostUser.name);
-        chai.expect(job).to.equal(PostUser.job);
+        chai.expect(data.id).to.exist;
+        chai.expect(name).to.equal(data.name);
+        chai.expect(job).to.equal(data.job);
     }
 });
 
-Then(/^I expect the (user) with name "(.*)" and job "(.*)" exist in Get API ReqRes.in$/,
-    async function(typeOfReq, name, job){
+Then(/^I expect the (user) with name "(.*)" exist in Get API ReqRes.in$/,
+    async function(typeOfReq, name){
         if(typeOfReq === 'user') {
             let exist = false;
             let totalPage = GetUsers.per_page;

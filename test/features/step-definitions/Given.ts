@@ -50,14 +50,9 @@ Given(/^I save a (user) with name "(.*)" and job "(.*)" in the API ReqRes.in$/,
     };
     let response = await reqResObject.POST(typeOfReq, payload);
     if(response.status === 201){
-        let data = JSON.stringify(response.body)
+        let data = JSON.stringify(await response.body)
         reporter.addStep(global.testId, "info", `API POST response received, data: ${data}`);
-        const filePath = path.join(__dirname, `../../../data/reqres-api-responses/users/POSTUser.json`);
-        if(process.env.RUNNER === 'LOCAL' && fs.existsSync(filePath)){
-            await fs.rmSync(filePath, {recursive: true});
-            await browser.pause(3000);
-        }
-        await fs.writeFileSync(filePath, data);
+        global.post_user_data = data;
     }
 });
 
