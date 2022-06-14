@@ -27,8 +27,8 @@ Given(/^I login into sauce demo page with user "(.*)" and password "(.*)"$/, asy
 });
 
 Given(/^I login into sauce demo page as a (.*)$/, async function(typeOfUser){
-    let user = process.env[`SAUCE_${typeOfUser.trim()}_USERNAME`];
-    let password = process.env[`SAUCE_${typeOfUser.trim()}_PASSWORD`];
+    let user = process.env[`SAUCE_${typeOfUser.trim().toUpperCase()}_USERNAME`];
+    let password = process.env[`SAUCE_${typeOfUser.trim().toUpperCase()}_PASSWORD`];
     reporter.addStep(global.testId, "info",`Login into sauce demo with user ${user} and pass ${password}`);
     await sauceHomePage.open("/");
     await sauceHomePage.loginToSauceDemo(user, password);
