@@ -1,0 +1,37 @@
+name: wdio-ci
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      URL: ${{secrets.URL}}
+      HEADLESS: ${{secrets.HEADLESS}}
+      DEBUG: ${{secrets.DEBUG}}
+      LOG_LEVEL: ${{secrets.LOG_LEVEL}}
+      ENVIRONMENT: ${{secrets.ENVIRONMENT}}
+      RUNNER: ${{secrets.RUNNER}}
+      BASEAPIURL: ${{secrets.BASEAPIURL}}
+      SAUCE_STANDARD_USER_USERNAME: ${{secrets.SAUCE_STANDARD_USER_USERNAME}}
+      SAUCE_STANDARD_USER_PASSWORD: ${{secrets.SAUCE_STANDARD_USER_PASSWORD}}
+      SAUCE_PROBLEM_USER_USERNAME: ${{secrets.SAUCE_PROBLEM_USER_USERNAME}}
+      SAUCE_PROBLEM_USER_PASSWORD: ${{secrets.SAUCE_PROBLEM_USER_PASSWORD}}
+      SAUCE_LOCKED_OUT_USER_USERNAME: ${{secrets.SAUCE_LOCKED_OUT_USER_USERNAME}}
+      SAUCE_LOCKED_OUT_USER_PASSWORD: ${{secrets.SAUCE_LOCKED_OUT_USER_PASSWORD}}
+    steps:
+      - name: Install Chromium
+        run: sudo apt-get install chromium-browser
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - name: Install dependencies
+        run: npm install
+      - name: Running smoke tests
+        run: npm run test:sauceDemo
