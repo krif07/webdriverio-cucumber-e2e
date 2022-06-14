@@ -229,7 +229,7 @@ export const config: Options.Testrunner = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    /*reporters: ['spec',
+    reporters: ['spec',
         ['allure',
             {
                 outputDir: 'allure-results',
@@ -237,8 +237,8 @@ export const config: Options.Testrunner = {
                 useCucumberStepReporter: true
             }
         ],
-    ],*/
-    reporters: [[reportportal, conf]],
+    ],
+    //reporters: [[reportportal, conf]],
 
     //
     // If you are using Cucumber you need to specify the location of your step definitions.
