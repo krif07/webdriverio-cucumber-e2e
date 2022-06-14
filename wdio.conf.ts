@@ -4,6 +4,47 @@ import allure from '@wdio/allure-reporter';
 import reporter from "./test/helper/reporter";
 import fs from 'fs';
 
+const reportportal = require('wdio-reportportal-reporter');
+const RpService = require("wdio-reportportal-service");
+
+const conf = {
+    reportPortalClientConfig: { // report portal settings
+        token: 'token',
+        endpoint: 'https://reportportal.url/api/v1',
+        launch: 'launch',
+        project: 'project',
+        mode: 'DEFAULT',
+        debug: false,
+        description: "Launch description text",
+        attributes: [{key:"tag", value: "foo"}],
+        headers: {"foo": "bar"}, // optional headers for internal http client
+        /*restClientConfig: { // axios like http client config - https://github.com/axios/axios#request-config
+            proxy: {
+                protocol: 'https',
+                host: '127.0.0.1',
+                port: 9000,
+                auth: {
+                    username: '',
+                    password: ''
+                }
+            },
+            timeout: 60000
+        }*/
+    },
+    reportSeleniumCommands: false, // add selenium commands to log
+    seleniumCommandsLogLevel: 'debug', // log level for selenium commands
+    autoAttachScreenshots: false, // automatically add screenshots
+    screenshotsLogLevel: 'info', // log level for screenshots
+    parseTagsFromTestTitle: false, // parse strings like `@foo` from titles and add to Report Portal
+    cucumberNestedSteps: false, // report cucumber steps as Report Portal steps
+    autoAttachCucumberFeatureToScenario: false, // requires cucumberNestedSteps to be true for use
+    sanitizeErrorMessages: true, // strip color ascii characters from error stacktrace
+    sauceLabOptions : {
+        enabled: true, // automatically add SauseLab ID to rp tags.
+        sldc: "US" // automatically add SauseLab region to rp tags.
+    }
+};
+
 let headless = process.env.HEADLESS;
 
 export const config: Options.Testrunner = {
@@ -167,8 +208,7 @@ export const config: Options.Testrunner = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: ['chromedriver'],
-
+    services: ['chromedriver', [RpService, {}]],
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: https://webdriver.io/docs/frameworks
@@ -189,16 +229,16 @@ export const config: Options.Testrunner = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec',
+    /*reporters: ['spec',
         ['allure',
             {
                 outputDir: 'allure-results',
                 disableWebdriverStepsReporting: true,
                 useCucumberStepReporter: true
             }
-        ]
-    ],
-
+        ],
+    ],*/
+    reporters: [[reportportal, conf]],
 
     //
     // If you are using Cucumber you need to specify the location of your step definitions.
@@ -338,9 +378,22 @@ export const config: Options.Testrunner = {
         console.log(`>>>>>>>>>>>>>> scenario ${JSON.stringify(scenario)}`);
         console.log(`>>>>>>>>>>>>>> result ${JSON.stringify(result)}`);
         console.log(`>>>>>>>>>>>>>> context ${JSON.stringify(context)}`);*/
-        if(!result.passed){
+        /*if(!result.passed){
             await browser.takeScreenshot();
             reporter.addStep(global.testId, "error", result.error)
+        }*/
+        if (!result.passed) {
+            let failureObject = {
+                type: "",
+                error: "",
+                title: ""
+            };
+            failureObject.type = 'afterStep';
+            failureObject.error = result.error;
+            failureObject.title = `${result.error} - - ${step.text}`;
+            const screenShot = await browser.takeScreenshot();
+            let attachment = Buffer.from(await screenShot, 'base64');
+            reportportal.sendFileToTest(failureObject, 'error', "screnshot.png", attachment);
         }
      },
     /**
@@ -400,8 +453,10 @@ export const config: Options.Testrunner = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {<Object>} results object containing test results
      */
-    // onComplete: function(exitCode, config, capabilities, results) {
-    // },
+     onComplete: async function(exitCode, config, capabilities, results) {
+        const link = await RpService.getLaunchUrl(config);
+        console.log(`Report portal link ${link}`)
+     },
     /**
     * Gets executed when a refresh happens.
     * @param {String} oldSessionId session ID of the old session
