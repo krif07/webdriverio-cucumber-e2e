@@ -7,6 +7,7 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "wdio": "npx wdio wdio.conf.ts > output.log",
         "test:tag": "npx wdio wdio.conf.ts --cucumberOpts.tagExpression",
+        "test:sauceDemo": "npx wdio wdio.conf.ts --cucumberOpts.tagExpression='@sauceDemo'",
         "sauce:tag": "npx wdio config/wdio.saucedemo.conf.ts --cucumberOpts.tagExpression",
         "test:demo": "npx wdio config/wdio.test.conf.ts --cucumberOpts.tagExpression='@demo' > output.log",
         "sauce:demo": "npx wdio config/wdio.saucedemo.conf.ts --cucumberOpts.tagExpression='@sauceDemo' > output.log",
